@@ -31,12 +31,20 @@ namespace SimpleEchoBot.Dialogs
         [LuisIntent("DeployBuild")]
         public async Task DeployBuildIntent(IDialogContext context, LuisResult result)
         {
-            var entityLookup = result.Entities.ToLookup(e => e.Entity);
+            try
+            {
+                var entityLookup = result.Entities.ToLookup(e => e.Entity);
 
-            var environment = entityLookup[DeployEntity.Environment]?.FirstOrDefault();
-            var buildNumber = entityLookup[DeployEntity.BuildNumber]?.FirstOrDefault();
+                var environment = entityLookup[DeployEntity.Environment]?.FirstOrDefault();
+                var buildNumber = entityLookup[DeployEntity.BuildNumber]?.FirstOrDefault();
 
-            await context.PostAsync($"Deploying build {buildNumber.Entity} to environment {environment.Entity}");
+                await context.PostAsync($"Deploying build {buildNumber.Entity} to environment {environment.Entity}");
+            }
+            catch (Exception e)
+            {
+                await context.PostAsync($"Exception:\n{e.ToString()}");
+            }
+
             context.Wait(MessageReceived);
         }
 
