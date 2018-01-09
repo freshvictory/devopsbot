@@ -33,10 +33,10 @@ namespace SimpleEchoBot.Dialogs
         {
             var entityLookup = result.Entities.ToLookup(e => e.Entity);
 
-            var environment = entityLookup[DeployEntity.Environment];
-            var buildNumber = entityLookup[DeployEntity.BuildNumber];
+            var environment = entityLookup[DeployEntity.Environment]?.FirstOrDefault();
+            var buildNumber = entityLookup[DeployEntity.BuildNumber]?.FirstOrDefault();
 
-            await context.PostAsync($"Deploying build {buildNumber} to environment {environment}");
+            await context.PostAsync($"Deploying build {buildNumber.Entity} to environment {environment.Entity}");
             context.Wait(MessageReceived);
         }
 
