@@ -1,4 +1,3 @@
-﻿using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -6,26 +5,9 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
-using System.Diagnostics;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
-    [Serializable]
-    public class EchoDialog : IDialog<object>
-    {
-        public async Task StartAsync(IDialogContext context)
-        {
-            context.Wait(MessageReceivedAsync);
-        }
-
-        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
-        {
-            var message = await argument;
-            await context.PostAsync("You said: " + message.Text);
-            context.Wait(MessageReceivedAsync);
-        }
-    }
-
     [BotAuthentication]
     public class MessagesController : ApiController
     {
