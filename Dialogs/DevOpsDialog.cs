@@ -33,7 +33,13 @@ namespace SimpleEchoBot.Dialogs
         {
             try
             {
-                var entityLookup = result.Entities.ToLookup(e => e.Entity);
+                var entityLookup = result.Entities?.ToLookup(e => e.Type);
+
+                if (entityLookup == null) {
+                    await context.PostAsync("No entities found for this command.");
+                    context.Wait(MessageReceived);
+                    return;
+                }
 
                 var environment = entityLookup[DeployEntity.Environment]?.FirstOrDefault();
                 var buildNumber = entityLookup[DeployEntity.BuildNumber]?.FirstOrDefault();
