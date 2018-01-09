@@ -6,12 +6,20 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
 using SimpleEchoBot.Dialogs;
+using System.Configuration;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        private readonly string botUsername;
+
+        public MessagesController()
+        {
+            botUsername = ConfigurationManager.AppSettings["BotUsername"];
+        }
+
         /// <summary>
         /// POST: api/Messages
         /// receive a message from a user and send replies
@@ -23,7 +31,10 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             // check if activity is of type message
             if (activity != null && activity.GetActivityType() == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new DevOpsDialog());
+                if (MentionedBy(activity.Text))
+                {
+                    await Conversation.SendAsync(activity, () => new DevOpsDialog());
+                }
             }
             else
             {
@@ -59,6 +70,16 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
 
             return null;
+        }
+
+        private bool MentionedBy(string text)
+        {
+            return text.Contains($"@{this.botUsername}");
+        }
+
+        private string RemoveMention(string text)
+        {
+            return text.Replace($"@{this.botUsername}", string.Empty);
         }
     }
 }

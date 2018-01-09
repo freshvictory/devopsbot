@@ -1,10 +1,15 @@
 ﻿<Properties StartupConfiguration="{9C7E3A46-B60F-4052-9A21-DC8D1A942216}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/DeployEntity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tasks/BackgroundTask.cs">
     <Files>
       <File FileName="Controllers/MessagesController.cs" Line="26" Column="82" />
       <File FileName="Dialogs/EchoDialog.cs" Line="1" Column="1" />
-      <File FileName="Dialogs/DevOpsDialog.cs" Line="35" Column="109" />
-      <File FileName="Models/DeployEntity.cs" Line="7" Column="12" />
+      <File FileName="Dialogs/DevOpsDialog.cs" Line="68" Column="9" />
+      <File FileName="Models/DeployEntity.cs" Line="8" Column="57" />
+      <File FileName="Web.config" Line="17" Column="48" />
+      <File FileName="Tasks/VstsClient.cs" Line="10" Column="18" />
+      <File FileName="Models/Build.cs" Line="6" Column="10" />
+      <File FileName="Tasks/ListBuilds.cs" Line="4" Column="1" />
+      <File FileName="Tasks/BackgroundTask.cs" Line="3" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

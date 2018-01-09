@@ -10,12 +10,15 @@ using System.Net.Http;
 using System.Text;
 using System.Linq;
 using SimpleEchoBot.Models;
+using SimpleEchoBot.Tasks;
+using Microsoft.Bot.Builder.ConnectorEx;
 
 namespace SimpleEchoBot.Dialogs
 {
     [Serializable]
     public class DevOpsDialog : LuisDialog<object>
     {
+
         public DevOpsDialog()
             :base(CreateLuisService())
         {
@@ -25,6 +28,11 @@ namespace SimpleEchoBot.Dialogs
         public async Task ListBuildsIntent(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Let me list those builds for you.");
+
+            var buildsTask = new ListBuilds(context.Activity.ToConversationReference());
+
+            buildsTask.Start();
+
             context.Wait(MessageReceived);
         }
 
@@ -48,7 +56,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (Exception e)
             {
-                await context.PostAsync($"Exception:\n{e.ToString()}");
+                await context.PostAsync($"Exception:\n{e}");
             }
 
             context.Wait(MessageReceived);
