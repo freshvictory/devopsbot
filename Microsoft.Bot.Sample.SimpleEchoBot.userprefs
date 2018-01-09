@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{9C7E3A46-B60F-4052-9A21-DC8D1A942216}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Dialogs/DevOpsDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/DeployEntity.cs">
     <Files>
-      <File FileName="Controllers/MessagesController.cs" Line="8" Column="1" />
+      <File FileName="Controllers/MessagesController.cs" Line="26" Column="82" />
       <File FileName="Dialogs/EchoDialog.cs" Line="1" Column="1" />
-      <File FileName="Dialogs/DevOpsDialog.cs" Line="12" Column="19" />
+      <File FileName="Dialogs/DevOpsDialog.cs" Line="35" Column="109" />
+      <File FileName="Models/DeployEntity.cs" Line="7" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

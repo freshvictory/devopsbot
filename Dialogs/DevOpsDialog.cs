@@ -8,6 +8,8 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
 using System.Text;
+using System.Linq;
+using SimpleEchoBot.Models;
 
 namespace SimpleEchoBot.Dialogs
 {
@@ -29,13 +31,12 @@ namespace SimpleEchoBot.Dialogs
         [LuisIntent("DeployBuild")]
         public async Task DeployBuildIntent(IDialogContext context, LuisResult result)
         {
-            var sb = new StringBuilder();
+            var entityLookup = result.Entities.ToLookup(e => e.Entity);
 
-            foreach (var entity in result.Entities) {
-                sb.AppendLine($"entity: {entity.Entity}, role: {entity.Role}, resolution: {entity.Resolution}, type: {entity.Type}");
-            }
+            var environment = entityLookup[DeployEntity.Environment];
+            var buildNumber = entityLookup[DeployEntity.BuildNumber];
 
-            await context.PostAsync(sb.ToString());
+            await context.PostAsync($"Deploying build {buildNumber} to environment {environment}");
             context.Wait(MessageReceived);
         }
 
